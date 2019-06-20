@@ -1,8 +1,14 @@
-@font-face{
-  font-family: "bariol regular";
-  src: url("/bariol-cufonfonts/bariol_regular-webfont.ttf")
-  }
-
+@font-face {
+    font-family: 'bariol';
+    src: url("bariol_regular-webfont.ttf") format("truetype");
+}
+body{
+  font-family: "Bariol", sans-serif;
+}
+header{
+  font-family: "Bariol", sans-serif;
+}
+/*barre menu en tête de page avec fond violet*/
 #entete {
   background-color:#793b6a;
   display:flex;
@@ -16,9 +22,7 @@
   align-items:flex-end;
   list-style-type: none;
 }
-
 li{margin: 10px;}
-
 .deals{
   color: white;
 }
@@ -46,7 +50,7 @@ li{margin: 10px;}
   background-color: #793b6a;
   border-color: transparent;
 }
-
+/*image en slide*/
 #slide {
   display:flex;
   justify-content:space-between;
@@ -55,17 +59,26 @@ li{margin: 10px;}
 .sejours{
   display: inline-block;
   position:absolute;
-  left: 1cm;
+  left: 5cm;
   top : 3cm;
   background-color: rgba(0,0,0, 0.5);
   color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 .vacances_mexique{
   position:absolute;
-  left: 1cm;
+  left: 5cm;
   top:5cm;
   background-color: rgba(0,0,0, 0.5);
   color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 #voirdeal{
   background-color: #ffe259;
@@ -74,8 +87,10 @@ li{margin: 10px;}
   margin-left: auto;
   margin-right: auto;
   color: #964615;
+  -webkit-border-radius: 10px;
+  border-radius: 5px;
 }
-
+/*barre de filtre*/
 h2{margin-left: 50px;}
 #filtre{
   display: flex;
@@ -87,17 +102,29 @@ h2{margin-left: 50px;}
   margin-right: 50px;
 }
 #catégorie{
-  background-color: #ffe259;
+  background-color: #793b6a;
   border-color: transparent;
   display: block;
-  color: #964615;
+  color: white;
+  -webkit-border-radius: 10px;
+  border-radius: 5px;
+  padding-right: 5px;
 }
+.categorie{color: rgba(169,169,169);}
+.depart{color: rgba(169,169,169);}
+.destination{color: rgba(169,169,169);}
+.periode{color: rgba(169,169,169);}
+#fleche{padding-left: 100px;}
 .filtre5{align-self: center;}
 #chercher{
   background-color: #219BC6;
   border-color: transparent;
+  -webkit-border-radius: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
 }
-
+/*encart pub*/
 #pub{
   display: block;
   margin-left: auto;

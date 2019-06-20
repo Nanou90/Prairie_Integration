@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<!-- modification test git-->
+
 <HTML lang="fr">
 
 <head>
@@ -8,7 +8,7 @@
 <title>Voyages Pirates</title>
 </head>
 
-<header> <!--barre menu en tête de page-->
+<header> <!--barre menu en tête de page avec fond violet-->
  <div id="entete">
 
   <img id="logo" src="/home/anne/Documents/Prairie integration/IMG/logo.png" alt="logo de voyages pirates" height="60" width="200"/>
@@ -33,7 +33,8 @@
 </header>
 
 <body>
- <div id="slide"> <!--images en slide-->
+<!--images en slide-->
+ <div id="slide">
   <img id="imageslide" src="/home/anne/Documents/Prairie integration/IMG/slide.png" alt="image de fond du slide"/>
     <div class="sejours">
       <p><img id="valise" src="/home/anne/Documents/Prairie integration/IMG/valise.png" height="20" width="20"/>  SÉJOURS</p>
@@ -46,24 +47,24 @@
     </div>
  </div>
 <br>
-
+<!--barre de filtre-->
 <h2>Filtrer les deals par</h2>
- <div id="filtre"> <!--barre de filtre-->
+ <div id="filtre">
  <div class="filtre1">
-    <label for="categorie">Sélectionnez une catégorie</label>
-    <br>
-    <button id="catégorie" type="menu" menu="popup-menu">Tous</button>
+    <label class="categorie">Sélectionnez une catégorie</label>
+    <br><!--rajout image fleche vers le bas sur le bouton-->
+    <button id="catégorie" type="menu" menu="popup-menu"><img id="boussole" src="/home/anne/Documents/Prairie integration/IMG/boussole.png" height="10" width="10"> Tous <img id="fleche" src="/home/anne/Documents/Prairie integration/IMG/arrow3.png" height="15" width="15"></button>
   </div>
-  <div class="filtre2">
-    <label for="depart">Départ</label><br>
+  <div class="filtre2"><!--rajout image dans input-->
+    <label class="depart">Départ</label><br>
     <input type="text" id="depart" placeholder="Départ" required minlength="0" maxlength="20" size="10">
   </div>
-  <div class="filtre3">
-    <label for="destination">Destination</label><br>
+  <div class="filtre3"><!--rajout image dans input-->
+    <label class="destination">Destination</label><br>
     <input type="text" id="destination" placeholder="Destination" required minlength="0" maxlength="20" size="10">
   </div>
-  <div class="filtre4">
-    <label for="periode">Période</label><br>
+  <div class="filtre4"><!--rajout image dans input-->
+    <label class="periode">Période</label><br>
     <input type="date" id="periode" placeholder="Période" required minlength="0" maxlength="20" size="10">
  </div>
  <div class="filtre5">
@@ -122,5 +123,3 @@
      </div>
 </body>
 </html>
-
-<!--modifier les icones en allant les chercher sur le site fontawesome.com -->
