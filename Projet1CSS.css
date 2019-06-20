@@ -1,0 +1,105 @@
+@font-face{
+  font-family: "bariol regular";
+  src: url("/bariol-cufonfonts/bariol_regular-webfont.ttf")
+  }
+
+#entete {
+  background-color:#793b6a;
+  display:flex;
+  justify-content:space-between;
+  font-size: 13px;
+}
+#nav{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items:flex-end;
+  list-style-type: none;
+}
+
+li{margin: 10px;}
+
+.deals{
+  color: white;
+}
+.chercher{
+  color: white;
+}
+.vaclastminute{
+  color: #F9BF38;
+}
+
+.identification{
+  display: flex;
+  align-items: flex-end;
+}
+#connexion{
+  background-color: #793b6a;
+  border-color: transparent;
+  color: white;
+}
+#search{
+  background-color: #793b6a;
+  border-color: transparent;
+}
+#langue{
+  background-color: #793b6a;
+  border-color: transparent;
+}
+
+#slide {
+  display:flex;
+  justify-content:space-between;
+}
+#imagesslide{position:relative;}
+.sejours{
+  display: inline-block;
+  position:absolute;
+  left: 1cm;
+  top : 3cm;
+  background-color: rgba(0,0,0, 0.5);
+  color: white;
+}
+.vacances_mexique{
+  position:absolute;
+  left: 1cm;
+  top:5cm;
+  background-color: rgba(0,0,0, 0.5);
+  color: white;
+}
+#voirdeal{
+  background-color: #ffe259;
+  border-color: transparent;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #964615;
+}
+
+h2{margin-left: 50px;}
+#filtre{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid rgba(200,200,200);
+  padding: 10px, 10px, 1px, 1px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+#catégorie{
+  background-color: #ffe259;
+  border-color: transparent;
+  display: block;
+  color: #964615;
+}
+.filtre5{align-self: center;}
+#chercher{
+  background-color: #219BC6;
+  border-color: transparent;
+}
+
+#pub{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
