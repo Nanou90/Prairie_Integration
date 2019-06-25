@@ -1,4 +1,4 @@
-var selectableWords =           // Word list
+var selectableWords =           // Liste de mots
     [
         "reggae",
         "scroll",
@@ -12,48 +12,54 @@ var selectableWords =           // Word list
         "poulet",
     ];
 
-const maxTries = 6;            // Maximum number of tries player has
+const maxTries = 6;            // Nombre maximum d'essais qu'a le joueur
+const maxParties = 5;           // Nombre maximum de parties
+const maxPoints = 20;           // Nombre maximum de points
 
-var guessedLetters = [];        // Stores the letters the user guessed
-var currentWordIndex;           // Index of the current word in the array
-var guessingWord = [];          // This will be the word we actually build to match the current word
-var remainingGuesses = 0;       // How many tries the player has left
-var gameStarted = false;        // Flag to tell if the game has started
-var hasFinished = false;        // Flag for 'press any key to try again'
-var wins = 0;                   // How many wins has the player racked up
+var guessedLetters = [];        // Stock les lettres que le joueur a utilisé
+var currentWordIndex;           // Mot actuel à trouver
+var guessingWord = [];          // Mot à trouver en cours de construction
+var remainingGuesses = 0;       // Combien d'essais reste-t-il au joueur
+var gameStarted = false;        // Flag to tell if the game has started - "Drapeau" pour dire si le jeu a commencé
+var hasFinished = false;        // Flag for 'press any key to try again' - "Drapeau" pour 'Appuie sur une touche pour continuer'
+var wins = 0;                   // Combien de victoires le joueur a-t-il accumulé
+var points = 0;                 // Combien de points le joueur a-t-il accumulé
+var parties = 1;                // Numéro de la partie en cours
 
-// Reset our game-level variables
+// Reset our game-level variables - Réinitialiser les variables de niveau de jeu
 function resetGame() {
     remainingGuesses = maxTries;
     gameStarted = false;
 
-    // Use Math.floor to round the random number down to the nearest whole.
+    // Utilisez Math.floor pour arrondir le nombre aléatoire à l'entier le plus proche
     currentWordIndex = Math.floor(Math.random() * (selectableWords.length));
 
-    // Clear out arrays
+    // Vider les tableaux
     guessedLetters = [];
     guessingWord = [];
 
-    // Make sure the hangman image is cleared
+    // S'assurer que l'image du pendu est effacé
     document.getElementById("hangmanImage").src = "";
 
-    // Build the guessing word and clear it out
+    // Construire le mot à deviner et l'éliminer
     for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
         guessingWord.push("_");
     }
-    // Hide game over and win images/text
+    // Cacher les images/textes de victoire ou de game-over
     document.getElementById("pressKeyTryAgain").style.cssText= "display: none";
     document.getElementById("gameover-image").style.cssText = "display: none";
     document.getElementById("youwin-image").style.cssText = "display: none";
 
-    // Show display
+    // Montrer l'affichage
     updateDisplay();
 };
 
-//  Updates the display on the HTML Page
+//  Mise à jour de l'affichage dans la page HTML
 function updateDisplay() {
 
     document.getElementById("totalWins").innerText = wins;
+    document.getElementById("totalPoints").innerText = points;
+    document.getElementById("partyNumber").innerText = parties;
     document.getElementById("currentWord").innerText = "";
     for (var i = 0; i < guessingWord.length; i++) {
         document.getElementById("currentWord").innerText += guessingWord[i];
@@ -63,26 +69,29 @@ function updateDisplay() {
     if(remainingGuesses <= 0) {
         document.getElementById("gameover-image").style.cssText = "display: block";
         document.getElementById("pressKeyTryAgain").style.cssText = "display:block";
+        document.getElementById("hangmanImage").src = "";
         hasFinished = true;
     }
 };
 
-// Updates the image depending on how many guesses
+// Mise à jour de l'image du pendu en fonction du nombre d'essais
 function updateHangmanImage() {
     document.getElementById("hangmanImage").src = "/home/anne/Documents/Jeu_pendu/pendu" + (maxTries - remainingGuesses) + ".png";
 };
 
 document.onkeydown = function(event) {
-    // If we finished a game, dump one keystroke and reset.
-    if(hasFinished) {
+    // Si nous terminons une partie, effacer une frappe et réinitiliser
+    if((hasFinished) && (parties<5)) {
         resetGame();
         hasFinished = false;
+        parties++;  //Rajout +1 au numéro de la partie
     } else {
-        // Check to make sure a-z was pressed.
+        // Vérifiez que vous avez appuyé sur a-z
         if(event.keyCode >= 65 && event.keyCode <= 90) {
             makeGuess(event.key.toLowerCase());
         }
     }
+    endGame();
 };
 
 function makeGuess(letter) {
@@ -91,7 +100,7 @@ function makeGuess(letter) {
             gameStarted = true;
         }
 
-        // Make sure we didn't use this letter yet
+        // S'assurer que nous n'avons pas encore utilisé cette lettre
         if (guessedLetters.indexOf(letter) === -1) {
             guessedLetters.push(letter);
             evaluateGuess(letter);
@@ -102,25 +111,24 @@ function makeGuess(letter) {
     checkWin();
 };
 
-// This function takes a letter and finds all instances of
-// appearance in the string and replaces them in the guess word.
+// Cette fonction prend une lettre et trouve toutes les occurrences d'apparence dans la chaîne et les remplace dans le mot à trouver
 function evaluateGuess(letter) {
-    // Array to store positions of letters in string
+    // Tableau pour stocker les positions des lettres dans une chaîne
     var positions = [];
 
-    // Loop through word finding all instances of guessed letter, store the indicies in an array.
+    // Parcoure en boucle les mots en recherchant toutes les occurrences des lettres devinées, stockez les index dans un tableau
     for (var i = 0; i < selectableWords[currentWordIndex].length; i++) {
         if(selectableWords[currentWordIndex][i] === letter) {
             positions.push(i);
         }
     }
 
-    // if there are no indicies, remove a guess and update the hangman image
+    // Si il n'y a pas d'indices, supprime une supposition et met à jour l'image du pendu
     if (positions.length <= 0) {
         remainingGuesses--;
         updateHangmanImage();
     } else {
-        // Loop through all the indicies and replace the '_' with a letter.
+        // Parcours en boucle tous les indices et remplacer le '_' par une lettre
         for(var i = 0; i < positions.length; i++) {
             guessingWord[positions[i]] = letter;
         }
@@ -131,7 +139,25 @@ function checkWin() {
     if(guessingWord.indexOf("_") === -1) {
         document.getElementById("youwin-image").style.cssText = "display: block";
         document.getElementById("pressKeyTryAgain").style.cssText= "display: block";
+        document.getElementById("hangmanImage").src = "";
         wins++;
+        points = points+4;  // Rajout de 4 points au score
         hasFinished = true;
+    }
+};
+
+// Fonction pour les phrases en fonction du score
+function endGame(){
+    if (parties == maxParties){
+    hasFinished = true;
+    document.getElementById("score").innerText = "score :" + points + "/20";
+      if (points<=8) {
+        document.getElementById("phrasescore").innerText = "T'es un noob !";
+      }
+      if ((points>=9) && (points<=16)) {
+        document.getElementById("phrasescore").innerText = "c'était si dur que ça ?";
+      }
+      if(points>=17) {        document.getElementById("phrasescore").innerText = "Bien joué !";
+      }
     }
 };
